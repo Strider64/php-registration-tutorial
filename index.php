@@ -30,7 +30,14 @@
                 </fieldset>
             </form>
             <div class="info">
-                
+                <h1>Registration Tutorial</h1>
+                <ol>
+                    <li>All input fields must be entered.</li>
+                    <li>Password must contain at least 8 characters, have at least one uppercase, one lowercase and one numeric character.</li>
+                    <li>Password and Verify Password must match.</li>
+                    <li>Email Address must be valid.</li>
+                    <li>Email Address and Verify Address must match.</li>
+                </ol>
             </div>
         </div>
     </body>
