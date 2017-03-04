@@ -108,5 +108,20 @@ div.info {
     margin: 10px;
 }
 
+div.info h1 {
+    font-size: 1.8rem;
+    line-height: 2.0;
+}
+
+div.info ol {
+    list-style: decimal;
+    padding: 0 20px;
+}
+div.info ol li {
+    font-family: 'Cantarell', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
 
 
