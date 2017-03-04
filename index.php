@@ -29,6 +29,9 @@
                     <input id="registerBtn" type="submit" name="submit" value="submit" tabindex="6">
                 </fieldset>
             </form>
+            <div class="info">
+                
+            </div>
         </div>
     </body>
 </html>
