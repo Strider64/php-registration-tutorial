@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css?family=Cantarell|Cardo');
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/* TYPOGRAPHY CSS */
+h1, legend {
+    font-family: 'Cardo', serif;
+}
+
+p, label {
+    font-family: 'Cantarell', sans-serif;
+}
+
+body {
+    background-color: gainsboro;
+    padding: 0;
+    margin: 0;
+}
+
+div.container {
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    background-color: darkseagreen;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+form#register {
+    display: block;
+    width: 100%;
+    max-width: 510px;
+    height: auto;
+    background-color: #2E2E2E;
+    padding: 15px;
+    margin: 10px auto;
+}
+
+form#register fieldset {
+    border: 2px solid #FFF;
+    padding: 20px;
+}
+
+form#register legend {
+    font-size: 1.4rem;
+    color: #FFF;
+    padding: 0 5px;
+}
+
+form#register label {
+    float: left;
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    height: 40px;
+    background-color: darkseagreen; 
+    font-size: 1.2rem;
+    color: #FFF;
+    line-height: 40px;
+    text-align: right;
+    text-transform: capitalize;
+    padding: 0 10px;
+}
+
+form#register input {
+    clear: right;
+    display: block;
+    width: 100%;
+    max-width: 216px;
+    height: 40px;
+    padding: 0 5px;
+    margin-bottom: 5px;
+}
+
+form#register input[type=submit] {
+    float: right;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    max-width: 80px;
+    height: 35px;
+    background-color: darkseagreen;
+    font-family: 'Cantarell', sans-serif;
+    font-size: 1.0rem;
+    color: #fff;
+    text-transform: uppercase;
+    margin-top: 15px;
+}
+
+form#register input[type=submit]:hover {
+    background-color: seagreen;
+}
