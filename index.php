@@ -55,7 +55,8 @@ if ($submit && $submit === 'submit') {
      */
     $result = validate($error);
     if (!is_array($result)) {
-        $info = saveRegistration($data, $pdo); 
+        $info = saveRegistration($data, $pdo);
+        unset($data);
     } else {
         //echo "<pre>" . print_r($error, 1) . "</pre>\n";
     }
@@ -77,28 +78,33 @@ if ($submit && $submit === 'submit') {
                     <legend>Registration Form</legend>
                     <input type="hidden" name="action" value="submit">
                     <label for="username">username:</label>
-                    <input id="username" type="text" name="username" value="" autofocus tabindex="1">
+                    <input id="username" type="text" name="username" value="<?php echo isset($data['username']) ? $data['username'] : NULL; ?>" autofocus tabindex="1">
                     <label for="password">password:</label>
                     <input id="password" type="password" name="password" tabindex="2">
                     <label for="verify">verify password:</label>
                     <input id="verify" type="password" name="verify" tabindex="3">
                     <label for="email">email address:</label>
-                    <input id="email" type="text" name="email" value="" tabindex="4">
+                    <input id="email" type="text" name="email" value="<?php echo isset($data['email']) ? $data['email'] : NULL; ?>" tabindex="4">
                     <label for="verify_email">verify email:</label>
-                    <input id="verify_email" type="text" name="verifyEmail" value="" tabindex="5">
+                    <input id="verify_email" type="text" name="verifyEmail" value="<?php echo isset($data['email_verify']) ? $data['email_verify'] : NULL; ?>" tabindex="5">
                     <input id="registerBtn" type="submit" name="submit" value="submit" tabindex="6">
                 </fieldset>
             </form>
             <div class="info">
-                <h1 class="green">Registration Tutorial</h1>
-                <ol>
-                    <li <?php echo (isset($result) && !$result['empty']) ? 'class="red"' : 'class="green"'; ?>>All input fields must be entered.</li>
-                    <li <?php echo (isset($result) && !$result['password']) ? 'class="red"' : 'class="green"'; ?>>Password must contain at least 8 characters, have at least one uppercase, one lowercase and one numeric character.</li>
-                    <li <?php echo (isset($result) && !$result['passwordMatch']) ? 'class="red"' : 'class="green"'; ?>>Password and Verify Password must match.</li>
-                    <li <?php echo (isset($result) && !$result['email']) ? 'class="red"' : 'class="green"'; ?>>Email Address must be valid.</li>
-                    <li <?php echo (isset($result) && !$result['emailMatch']) ? 'class="red"' : 'class="green"'; ?>>Email Address and Verify Address must match.</li>
-                    <?php echo (isset($result) && !$result['account']) ? '<li class="red">You already have an account registered with us!</li>' : NULL; ?>
-                </ol>
+                <?php if (isset($info)) { ?>
+                <h1 class="green">Successfully Registered!</h1>
+                <p class="green">You have successfully registered with Registration Tutorial. If you want to you can login to the Demo Page at <a href="login.php">login</a>?</p>
+                <?php } else { ?>
+                    <h1 class="green">Registration Tutorial</h1>
+                    <ol>
+                        <li <?php echo (isset($result) && !$result['empty']) ? 'class="red"' : 'class="green"'; ?>>All input fields must be entered.</li>
+                        <li <?php echo (isset($result) && !$result['password']) ? 'class="red"' : 'class="green"'; ?>>Password must contain at least 8 characters, have at least one uppercase, one lowercase and one numeric character.</li>
+                        <li <?php echo (isset($result) && !$result['passwordMatch']) ? 'class="red"' : 'class="green"'; ?>>Password and Verify Password must match.</li>
+                        <li <?php echo (isset($result) && !$result['email']) ? 'class="red"' : 'class="green"'; ?>>Email Address must be valid.</li>
+                        <li <?php echo (isset($result) && !$result['emailMatch']) ? 'class="red"' : 'class="green"'; ?>>Email Address and Verify Address must match.</li>
+                        <?php echo (isset($result) && !$result['account']) ? '<li class="red">You already have an account registered with us!</li>' : NULL; ?>
+                    </ol>
+                <?php } ?>
             </div>
         </div>
     </body>
