@@ -113,6 +113,23 @@ div.info h1 {
     line-height: 2.0;
 }
 
+div.info p {
+    font-family: 'Cantarell', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+}
+
+div.info p a {
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #2E2E2E;
+    font-weight: bold;
+}
+
+div.info p a:hover {
+    color: magenta;
+}
+
 div.info ol {
     list-style: decimal;
     padding: 0 20px;
