@@ -1,5 +1,65 @@
 <?php
+/*
+ * Turn on error reporting, set the default timezone, start sessions and create a constant PDO database 
+ * connection to the database in config.php under the directory includes in the the assests folder.
+ */
+require_once 'assests/includes/config.php';
+/*
+ * Create a bunch of helper functions since we are creating the registration and input the procedural way, 
+ * if we had been doing the Object-Oriented Programming way we would had created an classes and a class
+ * autoloader.
+ */
+require_once 'assests/functions/functions.inc.php';
+/*
+ * Create an users table if one doesn't already exists, once it exists you can comment out the call to the createTabase
+ * function. Though it really doesn't hurt leaving it in there. 
+ */
+createTables(); // You can comment this out when this is run at least once:
 
+$data = []; // An array that we setup as $data:
+$error = [];
+/*
+ * When user click on the submit button we grab the hidden input variable and the
+ * reason we do that instead of the regular submit button is to ensure that we get the click.
+ * For some older I.E. browsers don't register the click on the submit button (or so I am told).
+ */
+$submit = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_FULL_SPECIAL_CHARS); // using htmlspecialchars sanitizes the variable:
+
+if ($submit && $submit === 'submit') {
+    /*
+     * Grab all the user's input responses and store them it the array called $data. We
+     * will shorting be validating all the input fields and then storing the values in a database table if everything
+     * passes validation.
+     */
+    $data['username'] = htmlspecialchars($_POST['username']);
+    $data['password'] = htmlspecialchars($_POST['password']);
+    $data['password_verify'] = htmlspecialchars($_POST['verify']);
+    $data['email'] = htmlspecialchars($_POST['email']);
+    $data['email_verify'] = htmlspecialchars($_POST['verifyEmail']);
+
+    /*
+     * Validate user's input from registration form. Check to see if all fields have been entered, password is 
+     * valid, email is valid, verify that both password and email address has been entered correct and make sure there
+     * are no dupicate accounts being entered. 
+     */
+    $error['empty'] = checkContent($data);
+    $error['password'] = checkPassword($data['password']);
+    $error['email'] = checkEmail($data['email']);
+    $error['passwordMatch'] = passwordMatch($data['password'], $data['password_verify']);
+    $error['emailMatch'] = emailMatch($data['email'], $data['email_verify']);
+    $error['account'] = accountStatus($data['email'], $pdo);
+
+    /*
+     * Check to see if everything passes, if so save user's acount to database table users. Otherwise inform
+     * user there was an error(s) when registering and please try again. 
+     */
+    $result = validate($error);
+    if (!is_array($result)) {
+        $info = saveRegistration($data, $pdo); 
+    } else {
+        echo "<pre>" . print_r($error, 1) . "</pre>\n";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
