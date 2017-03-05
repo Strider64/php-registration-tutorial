@@ -57,7 +57,7 @@ if ($submit && $submit === 'submit') {
     if (!is_array($result)) {
         $info = saveRegistration($data, $pdo); 
     } else {
-        echo "<pre>" . print_r($error, 1) . "</pre>\n";
+        //echo "<pre>" . print_r($error, 1) . "</pre>\n";
     }
 }
 ?>
@@ -90,13 +90,14 @@ if ($submit && $submit === 'submit') {
                 </fieldset>
             </form>
             <div class="info">
-                <h1>Registration Tutorial</h1>
+                <h1 class="green">Registration Tutorial</h1>
                 <ol>
-                    <li>All input fields must be entered.</li>
-                    <li>Password must contain at least 8 characters, have at least one uppercase, one lowercase and one numeric character.</li>
-                    <li>Password and Verify Password must match.</li>
-                    <li>Email Address must be valid.</li>
-                    <li>Email Address and Verify Address must match.</li>
+                    <li <?php echo (isset($result) && !$result['empty']) ? 'class="red"' : 'class="green"'; ?>>All input fields must be entered.</li>
+                    <li <?php echo (isset($result) && !$result['password']) ? 'class="red"' : 'class="green"'; ?>>Password must contain at least 8 characters, have at least one uppercase, one lowercase and one numeric character.</li>
+                    <li <?php echo (isset($result) && !$result['passwordMatch']) ? 'class="red"' : 'class="green"'; ?>>Password and Verify Password must match.</li>
+                    <li <?php echo (isset($result) && !$result['email']) ? 'class="red"' : 'class="green"'; ?>>Email Address must be valid.</li>
+                    <li <?php echo (isset($result) && !$result['emailMatch']) ? 'class="red"' : 'class="green"'; ?>>Email Address and Verify Address must match.</li>
+                    <?php echo (isset($result) && !$result['account']) ? '<li class="red">You already have an account registered with us!</li>' : NULL; ?>
                 </ol>
             </div>
         </div>
